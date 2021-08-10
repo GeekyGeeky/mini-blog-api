@@ -1,14 +1,15 @@
-import { merge } from 'lodash'
-const env = process.env.NODE_ENV || 'development'
+import { merge } from 'lodash';
+import { config as dotenvConfig } from 'dotenv';
+dotenvConfig();
+
+
+const env = process.env.NODE_ENV || 'development';
+const port = process.env.PORT || 4002;
 
 const baseConfig = {
     env,
     isDev: env === 'development',
-    port: 3000,
-    secrets: {
-        jwt: process.env.JWT_SECRET,
-        jwtExp: '100d'
-    }
+    port,
 }
 
 let envConfig = {}

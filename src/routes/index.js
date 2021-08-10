@@ -1,5 +1,11 @@
 import { Router } from 'express';
+import verifyAuth from '../middlewares/auth_handler';
+
+// import controllers
 import indexController from '../controllers';
+
+//import routers
+import UsersRouter from './users';
 
 class IndexRouter {
     constructor() {
@@ -21,7 +27,10 @@ class IndexRouter {
     }
     routes = () => {
         this.router.get('/', this.index);
-        this.router.get('/login', indexController.loginUser);
+        this.router.post('/login', indexController.loginUser);
+        this.router.post('/profile', verifyAuth, this.index);
+        this.router.use(verifyAuth);
+        this.router.use('/users', UsersRouter);
         return this.router;
     }
 }

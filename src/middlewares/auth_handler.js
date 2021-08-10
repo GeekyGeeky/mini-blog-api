@@ -1,11 +1,10 @@
-const { verify } = require('jsonwebtoken');
+import { verify } from 'jsonwebtoken';
 // const User = require('../models/User');
-const ErrorResponse = require('../utils/error_response');
-const asyncHandler = require('./async_handler');
+import ErrorResponse from '../utils/error_response';
+import { asyncHandler } from './async_handler';
 
-module.exports = {
-    verifyToken: asyncHandler(
-        async (req, res, next) => {
+export default asyncHandler(
+    async (req, res, next) => {
         let token;
         let authHeader = req.headers.authorization;
         if (authHeader && authHeader.startsWith('Bearer')) {
@@ -14,7 +13,7 @@ module.exports = {
         }
 
         if (!token) {
-            return next(new ErrorResponse('Unauthorized access', 401));
+            return next(new ErrorResponse('Unauthorized access bosk', 401));
         }
         try {
             const decoded = verify(token, process.env.ACCESS_TOKEN_SECRET);
@@ -27,4 +26,3 @@ module.exports = {
 
         }
     })
-}
