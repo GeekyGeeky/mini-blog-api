@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/GeekyGeeky/mini-blog-api#readme",
   "dependencies": {
-    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
@@ -41,6 +41,7 @@
     "lodash": "^4.17.21",
     "mongoose": "^5.13.5",
     "morgan": "^1.10.0",
+    "sanitize-html": "^2.4.0",
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
