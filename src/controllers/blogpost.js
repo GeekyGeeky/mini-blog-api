@@ -10,7 +10,7 @@ export default class BlogpostController {
     static getAllPosts = asyncHandler(
         async (req, res, next) => {
 
-            const blogPosts = await BlogpostModel.find().populate({ path: 'author', select: 'name username'});
+            const blogPosts = await BlogpostModel.find().populate({ path: 'author', select: 'name username dateJoined' });
 
             return new JsonResponse(200).success(res, "Available blog posts", blogPosts);
 
@@ -19,7 +19,7 @@ export default class BlogpostController {
     static createPost = asyncHandler(
         async (req, res, next) => {
             const { id } = req.user;
-            const { title, content, imgUrl, tags }  = req.body;
+            const { title, content, imgUrl, tags } = req.body;
 
             const blogPost = await BlogpostModel.create({ title, content, imgUrl, tags, author: id });
 
@@ -30,8 +30,8 @@ export default class BlogpostController {
 
 
 /**
- * 
- * 
+ *
+ *
  *  const transactionHistory = await Transaction.findOne({
                 $or: [
                     { $and: [{ creatorId: uid }, { _id: transaction_id }] },

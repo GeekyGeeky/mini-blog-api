@@ -28,7 +28,7 @@ export default class IndexController {
             //   // set password to undefined and get user token
             user.password = undefined;
             const token = user.getJwtToken();
-            return new JsonResponse(422).success(res, "User logged in successfully", { ...user.toObject(), token});
+            return new JsonResponse(200).success(res, "User logged in successfully", { ...user.toObject(), token});
 
         });
 
@@ -48,12 +48,12 @@ export default class IndexController {
             });
 
             //   // throw error if user not found
-            if (findUser) return next(new ErrorResponse('Email or username already exist', 401));
+            if (findUser) return next(new ErrorResponse('Email or username already exist', 400));
 
             // create new user
             const user = await UserModel.create({ email, username, password, name });
             const userData = { name, email, username, dateJoined: user.dateJoined };
-            return new JsonResponse(422).success(res, "User created successfully", userData);
+            return new JsonResponse(201).success(res, "User created successfully", userData);
 
         });
 }

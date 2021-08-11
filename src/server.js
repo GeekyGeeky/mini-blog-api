@@ -37,7 +37,7 @@ app.use(mongoSanitize());
 // add secure headers
 app.use(helmet());
 
-app.use(xss());
+// app.use(xss());
 
 
 app.use('/api/v1', apiRoutes);
